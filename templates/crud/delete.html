@@ -1,0 +1,18 @@
+{% extends 'news/base.html' %}
+{% load static %}
+
+{% block title %}{{ news.title }}{% endblock title %}
+
+{% block content %}
+
+     <h2>Joriy postni o'chirish</h2>
+    <form method="post">{% csrf_token %}
+    <p>{{ news.title | truncatewords:3 }} nomli yangilikni o'chirmoqchimisiz?</p>
+        <p><img src="{{ news.image.url }}" width="400"></p>
+    <hr>
+    <button type="submit" class="btn btn-red">Ha</button>
+    <a href="{% url 'news_detail' news.slug %}">Yo'q</a>
+    <hr>
+    </form>
+
+{% endblock content %}

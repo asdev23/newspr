@@ -1,0 +1,17 @@
+{% extends 'news/base.html' %}
+{% load static %}
+
+{% block title %}Login{% endblock title %}
+
+{% block content %}
+
+    <h2>Login</h2>
+    <form method="POST">{% csrf_token %}
+        {{ form.as_p }}
+        <h6><a href="{% url 'signup' %}" style="color:blue">Ro'yxatdan o'tish</a></h6>
+        <h6><a href="{% url 'password_reset' %}" style="color:blue">Parolni unutdingizmi?</a></h6>
+        <button type="submit">Login</button>
+    <hr>
+    </form>
+
+{% endblock content %}

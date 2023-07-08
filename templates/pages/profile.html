@@ -1,0 +1,18 @@
+{% extends 'news/base.html' %}
+{% load static %}
+
+{% block title %}Foydalanuvchi sahifasi{% endblock title %}
+
+{% block content %}
+    <h2>Salom {{ user.first_name }}!</h2>
+    <img src="{{ profile.photo.url }}" width="20%"><hr>
+    <label>Username:</label><input value="{{ user.username }}" readonly placeholder="Kiritilmagan"><br>
+    <label>Ismingiz:</label><input value="{{ user.first_name }}" readonly placeholder="Kiritilmagan"><br>
+    <label>Familyangiz:</label><input value="{{ user.last_name }}" readonly placeholder="Kiritilmagan"><br>
+    <label>Email:</label><input value="{{ user.email }}" readonly placeholder="Kiritilmagan"><br>
+    <label>Manzil:</label><input value="{{ profile.address }}" readonly placeholder="Kiritilmagan"><br>
+
+    <h4><a href="{% url 'edit' %}"  style="color: blue">Edit Profile</a></h4>
+    <h4><a href="{% url 'password_change' %}"  style="color: red">Parolni almashtirish</a></h4>
+    <h4><a href="{% url 'logout' %}"  style="color: red">LogOUt</a></h4>
+{% endblock content %}

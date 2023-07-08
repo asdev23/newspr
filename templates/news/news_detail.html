@@ -1,0 +1,52 @@
+{% extends 'news/base.html' %}
+{% load static %}
+{% load hitcount_tags %}
+
+{% block title %}{{ news.title }}{% endblock title %}
+
+{% block content %}
+
+<h1>{{ news.title }}</h1>
+<img src="{{ news.image.url }}" style="width:100%" alt="">
+<h3>{{ news.body | linebreaks }}</h3>
+<p>{{ news.publish_time }} | <i class="fa fa-eye" aria-hidden="true"></i>{% get_hit_count for news %}</p>
+
+{% if request.user.is_authenticated and request.user.is_superuser %}
+    <div class="card-footer text-center">
+    <a href="{% url 'update' news.slug %}" style="color: blue">Taxrirlash</a>
+    <a href="{% url 'delete' news.slug %}" style="color: blue">O'chirish</a>
+    </div>
+{% endif %}
+
+<br>
+<h4>Izohlar soni: {{ comment_count }} ta</h4>
+{% for comment in comments %}
+<div class="comments" style="padding: 10px">
+    <p class="font-weight-bold">
+        {{ comment.user }}
+        <span class="text-muted font-weight-normal">
+            {{ comment.created_time }}
+        </span>
+    </p>
+    {{ comment.body | linebreaks }}
+</div>
+{% endfor %}
+
+{% if request.user.is_authenticated %}
+<div class="col-md-8 card-mb-4 mt-3">
+    <div class="card-body">
+        <h3>Izoh qoldirish</h3>
+        <form method="POSt" style="margin-top: 1.3em">{% csrf_token %}
+            {{ comment_form.as_p }}
+            <button type="submit" class="btn btn-primary btn-lg">Yuborish</button>
+        </form>
+    </div>
+</div>
+{% else %}
+<div class="card-body">
+    <p class="text-danger">Faqatgina ro'yxatdan o'tgan foydalanuvchilar izoh qoldirishi mumkin!</p>
+    <p>Izoh qoldirish uchun <a href="{% url 'login' %}" style="color: blue">Login</a> qiling.</p>
+</div>
+{% endif %}
+
+{% endblock content %}

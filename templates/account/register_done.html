@@ -1,0 +1,10 @@
+{% extends 'news/base.html' %}
+{% load static %}
+{% block title %}Ro'yxatdan o'tish{% endblock title %}
+
+{% block content %}
+    <h1>Muvaffaqiyatli bajarildi.</h1>
+    <hr>
+    <h2>Xush kelibsiz {{ new_user.first_name }}</h2>
+      <h2>Saytga kirish:-> <a href="{% url 'login' %}" style="color:blue">Login</a></h2>
+{% endblock content %}
